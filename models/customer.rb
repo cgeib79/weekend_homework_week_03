@@ -32,6 +32,8 @@ class Customer
     return films.map {|result| Film.new(result)}
   end
 
+  
+
   def self.all()
     sql = "SELECT * FROM customers"
     values = []
