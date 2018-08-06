@@ -32,7 +32,12 @@ class Customer
     return films.map {|result| Film.new(result)}
   end
 
-  
+  def decrease_funds()
+    sql = "SELECT SUM(customers.customer_funds) FROM customers WHERE tickets.film_id = $1"
+    values = [@id]
+    result = SqlRunner.run(sql, values).first
+    return @customer_funds - result['sum'].to_i
+  end
 
   def self.all()
     sql = "SELECT * FROM customers"
